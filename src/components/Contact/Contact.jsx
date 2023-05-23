@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDeleteContactMutation } from '../../redux/phoneBookApi';
 import { Loader } from '../Loader/Loader';
@@ -11,9 +12,19 @@ import {
 } from './Contact.styled';
 import 'react-toastify/dist/ReactToastify.css';
 
+
 export const Contact = ({ name, phone, id, index }) => {
   const [deleteContact, { isLoading, isSuccess, isError }] =
     useDeleteContactMutation();
+
+   useEffect(() => {
+    if (isSuccess) {
+      toast.success('Contact successfully removed');
+    }
+    if (isError) {
+      toast.error('Something went wrong');
+    }
+   })
 
   if (isSuccess) {
     toast.success('Contact successfully removed');
