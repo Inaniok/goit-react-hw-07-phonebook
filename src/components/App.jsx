@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
@@ -13,9 +14,11 @@ export const App = () => {
   const { error, isError, isLoading } = useFetchAllContactsQuery();
   const displayedContacts = DisplayedContacts();
 
+  useEffect(() => {
   if (isError) {
     toast.error(error.data);
   }
+});
 
   return (
     <Wrapper>
